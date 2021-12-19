@@ -34,7 +34,6 @@ export const getIncomes = (req, res) => {
         if (err) {
           res.send(err);
         }
-        console.log(incomes)
         res.json(incomes);
       }
     );

@@ -15,7 +15,7 @@ import {
   removeTransactionById,
   updateTransactionById,
 } from "../controllers/transactionsController";
-import { login, logout, register } from "../controllers/userController.js";
+import { login, logout, profile, register, updatePassword, updateProfile } from "../controllers/userController.js";
 
 const routes = (app) => {
   app.route("/api/transactions").get(getAllTransaction).post(addNewTransaction);
@@ -39,7 +39,11 @@ const routes = (app) => {
   app.route("/api/register").post(register);
 
   app.route("/api/logout").delete(logout);
-  
+
+  app.route("/api/me").get(profile).put(updateProfile)
+
+  app.route("/api/updatePassword").put(updatePassword)
+
 };
 
 export default routes;
