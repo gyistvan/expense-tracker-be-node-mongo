@@ -8,13 +8,12 @@ import jsonwebtoken from "jsonwebtoken";
 export const JSON_SECRET = "etBE";
 
 const app = express();
-const PORT = 3000;
-
-const uri = process.env.MONGODB_URI ? process.env.MONGODB_URI : "mongodb://localhost/APPdb"
+const PORT = process.env.PORT ? process.env.PORT : 3000;
+const URI = process.env.MONGODB_URI ? process.env.MONGODB_URI : "mongodb://localhost/APPdb"
 
 // mongoose connection
 mongoose.Promise = global.Promise;
-mongoose.connect(uri, {
+mongoose.connect(URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
