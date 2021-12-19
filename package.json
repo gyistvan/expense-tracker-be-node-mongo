@@ -4,8 +4,9 @@
   "description": "expense tracker for personal use",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js",
-    "prettier": "npx prettier --write ."
+    "start": "babel-node index.js",
+    "prettier": "npx prettier --write .",
+    "dev": "nodemon ./index.js --exec babel-node -e js"
   },
   "repository": {
     "type": "git",
