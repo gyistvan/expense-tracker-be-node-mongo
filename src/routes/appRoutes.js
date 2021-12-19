@@ -25,7 +25,6 @@ const routes = (app) => {
     .get(getTransactionById)
     .put(updateTransactionById)
     .delete(removeTransactionById);
-
   app.route("/api/incomes").get(getIncomes).post(addNewIncome);
 
   app.route("/api/incomeById/:incomeId").delete(removeIncomeById);
@@ -36,8 +35,11 @@ const routes = (app) => {
     .post(addNewSaving)
     .put(updateSavingById);
   app.route("/api/login").post(login);
+
   app.route("/api/register").post(register);
+
   app.route("/api/logout").delete(logout);
+  
 };
 
 export default routes;
