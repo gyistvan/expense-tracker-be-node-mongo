@@ -13,9 +13,9 @@ export const addNewTransaction = (req, res) => {
     });
     newTransaction.save((err, transaction) => {
       if (err) {
-        res.send(err);
+        res.send({error:true, message: err.error});
       }
-      res.json(transaction);
+      res.json({transaction, error: false, message: "Spending successfully added"});
     });
   });
 };
@@ -50,7 +50,7 @@ export const getTransactionById = (req, res) => {
       if (err) {
         res.send(err);
       }
-      res.json(transaction);
+      res.json({transaction, error: false, message: "Spending successfully deleted"});
     });
   });
 };
@@ -71,7 +71,7 @@ export const updateTransactionById = (req, res) => {
         if (err) {
           res.send(err);
         }
-        res.json(transaction);
+        res.json({transaction, error: false, message: "Spending has been updated"});
       }
     );
   });
@@ -86,9 +86,9 @@ export const removeTransactionById = (req, res) => {
       },
       (err, transaction) => {
         if (err) {
-          res.send(err);
+          res.send({error: true, message: err.error});
         }
-        res.json({ message: "successfully deleted transaction" });
+        res.json({ message: "Spending has been deleted", error: false});
       }
     );
   });

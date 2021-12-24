@@ -12,7 +12,7 @@ export const addNewIncome = (req, res) => {
       if (err) {
         res.send(err);
       }
-      res.json(income);
+      res.json({income, error: false, message: "Successfully added income"});
     });
   });
 };
@@ -28,7 +28,7 @@ export const getIncomes = (req, res) => {
           $gte: new Date(startDate),
           $lte: new Date(endDate),
         },
-        groupId: userData.groupId
+        groupId: userData.groupId,
       },
       (err, incomes) => {
         if (err) {
@@ -51,7 +51,7 @@ export const removeIncomeById = (req, res) => {
         if (err) {
           res.send(err);
         }
-        res.json({ message: "successfully deleted income" });
+        res.json({ error:false, message: "successfully deleted income" });
       }
     );
   });

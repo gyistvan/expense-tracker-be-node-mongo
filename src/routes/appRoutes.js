@@ -1,4 +1,12 @@
 import {
+  acceptInvite,
+  createGroup,
+  declineInvite,
+  getGroup,
+  inviteUser,
+  updateGroup,
+} from "../controllers/groupController";
+import {
   addNewIncome,
   getIncomes,
   removeIncomeById,
@@ -15,7 +23,14 @@ import {
   removeTransactionById,
   updateTransactionById,
 } from "../controllers/transactionsController";
-import { login, logout, profile, register, updatePassword, updateProfile } from "../controllers/userController.js";
+import {
+  login,
+  logout,
+  profile,
+  register,
+  updatePassword,
+  updateProfile,
+} from "../controllers/userController.js";
 
 const routes = (app) => {
   app.route("/api/transactions").get(getAllTransaction).post(addNewTransaction);
@@ -40,10 +55,19 @@ const routes = (app) => {
 
   app.route("/api/logout").delete(logout);
 
-  app.route("/api/me").get(profile).put(updateProfile)
+  app.route("/api/me").get(profile).put(updateProfile);
 
-  app.route("/api/updatePassword").put(updatePassword)
+  app.route("/api/updatePassword").put(updatePassword);
 
+  app.route("/api/group").post(createGroup);
+
+  app.route("/api/group/:groupId").get(getGroup).put(updateGroup);
+
+  app
+    .route("/api/group/:groupId/invite")
+    .put(inviteUser)
+    .get(acceptInvite)
+    .delete(declineInvite);
 };
 
 export default routes;

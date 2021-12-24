@@ -32,6 +32,10 @@ export const userSchema = new Schema({
     type: String,
     default: uuidv4(),
   },
+  pendingInvites: {
+    type: Object,
+    default: {},
+  },
 });
 
 userSchema.methods.comparePassword = function (password) {

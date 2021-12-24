@@ -1,3 +1,4 @@
+import moment from "moment";
 import mongoose from "mongoose";
 import { getUser } from "../helpers/authenticateUser";
 import { savingSchema } from "../models/savingModel";
@@ -35,7 +36,7 @@ export const addNewSaving = (req, res) => {
       if (err) {
         res.send(err);
       }
-      res.json(saving);
+      res.json({saving, error: false, message: `Saving has been added to ${moment(saving.appliedMonth).format("YYYY. MMMM")}`});
     });
   });
 };
@@ -56,7 +57,7 @@ export const updateSavingById = (req, res) => {
         if (err) {
           res.send(err);
         }
-        res.json(saving);
+        res.json({saving, error: false, message: `Saving has been updated for ${moment(saving.appliedMonth).format("YYYY. MMMM")}`});
       }
     );
   });

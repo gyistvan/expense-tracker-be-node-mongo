@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { JSON_SECRET } from "../..";
-import { getUser, verifyToken } from "../helpers/authenticateUser";
+import { getUser } from "../helpers/authenticateUser";
 
 const User = mongoose.model("User", userSchema);
 
@@ -12,12 +12,17 @@ export const register = (req, res) => {
   newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
   newUser.save(function (err, user) {
     if (err) {
-      return res.status(400).send({
-        message: err,
-      });
+      if(err.code === 11000){
+          return res.status(400).send({
+            message: "Email already in use, please choose another",
+          });
+      }
+      else {
+          return res.status(400).send(err)
+      }
     } else {
       user.hash_password = undefined;
-      return res.json(user);
+      return res.json({user, error: false, message: "Successful registration, you can login now"});
     }
   });
 };
@@ -30,7 +35,7 @@ export const login = (req, res) => {
     (err, user) => {
       if (err) throw err;
       if (!user || !user.comparePassword(req.body.password)) {
-        return res.status(401).json({
+        return res.status(401).json({error: true,
           message: "Authentication failed. Invalid user or password.",
         });
       }
@@ -48,70 +53,74 @@ export const login = (req, res) => {
   );
 };
 
-export const updateProfile = (req,res) => {
-    const userPromise = getUser(req.headers.authorization);
-    userPromise.then((userData) => {
-        User.findOneAndUpdate(
-            {email: userData.email},
-            {name: req.body.name, email: req.body.email, groupId: req.body.groupId},
-            {
-                new: true,
-                useFindAndModify: false,
-            },
-            (err, user) => {
-              if (err) throw err;
-              return res.json(user);
-            }
-        )
-    })
-}
+export const updateProfile = (req, res) => {
+  const userPromise = getUser(req.headers.authorization);
+  userPromise.then((userData) => {
+    User.findOneAndUpdate(
+      { email: userData.email },
+      { name: req.body.name, email: req.body.email, groupId: req.body.groupId },
+      {
+        new: true,
+        useFindAndModify: false,
+      },
+      (err, user) => {
+        if (err) throw err;
+        return res.json(user);
+      }
+    );
+  });
+};
 
-export const profile = (req, res, next) => {
-    const userPromise = getUser(req.headers.authorization);
-    userPromise.then((userData) => {
-        res.send({name: userData.name, email: userData.email, groupId: userData.groupId});
-        next();
-    })
+export const profile = (req, res) => {
+  const userPromise = getUser(req.headers.authorization);
+  userPromise.then((userData) => {
+    res.send({
+      name: userData.name,
+      email: userData.email,
+      groupId: userData.groupId,
+      _id: userData._id,
+      pendingInvites: userData.pendingInvites,
+    });
+  });
 };
 
 export const logout = (req, res) => {
-    res.json("successful logout");
+  res.json("successful logout");
 };
 
 export const updatePassword = (req, res) => {
-    if (req.body.newPassword === req.body.newPassword2){
-        const userPromise = getUser(req.headers.authorization);
-        userPromise.then((userData) => {       
-            User.findOne(
-                {
-                  email: userData.email,
-                },
-                (err, user) => {
-                  if (err) throw err;
-                  if (!user || !user.comparePassword(req.body.oldPassword)) {
-                    return res.status(400).json({
-                      message: "Bad request, old password is invalid",
-                    });
-                  }
-                  User.findOneAndUpdate(
-                    {
-                      email: userData.email,
-                    },
-                    { hash_password: bcrypt.hashSync(req.body.newPassword, 10)},
-                    {
-                        new: true,
-                        useFindAndModify: false,
-                    },
-                    (err, user) => {
-                      if (err) throw err;
-                      return res.json("Password successfully changed");
-                    }
-                );
-                }
-            );
-        })
-    }
-    else {
-        res.json("new passwords doesn't match")
-    }
-}
+  if (req.body.newPassword === req.body.newPassword2) {
+    const userPromise = getUser(req.headers.authorization);
+    userPromise.then((userData) => {
+      User.findOne(
+        {
+          email: userData.email,
+        },
+        (err, user) => {
+          if (err) throw err;
+          if (!user || !user.comparePassword(req.body.oldPassword)) {
+            return res.status(400).json({
+              message: "Bad request, old password is invalid",
+            });
+          }
+          User.findOneAndUpdate(
+            {
+              email: userData.email,
+            },
+            { hash_password: bcrypt.hashSync(req.body.newPassword, 10) },
+            {
+              new: true,
+              useFindAndModify: false,
+            },
+            (err, user) => {
+              if (err) throw err;
+              return res.json("Password successfully changed");
+            }
+          );
+        }
+      );
+    });
+  } else {
+    res.json("new passwords doesn't match");
+  }
+};

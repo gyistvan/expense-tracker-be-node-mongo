@@ -9,7 +9,9 @@ export const JSON_SECRET = "etBE";
 
 const app = express();
 const PORT = process.env.PORT ? process.env.PORT : 3000;
-const URI = process.env.MONGODB_URI ? process.env.MONGODB_URI : "mongodb://localhost/APPdb"
+const URI = process.env.MONGODB_URI
+  ? process.env.MONGODB_URI
+  : "mongodb://localhost/APPdb";
 
 // mongoose connection
 mongoose.Promise = global.Promise;
