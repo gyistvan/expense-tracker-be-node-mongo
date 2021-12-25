@@ -15,7 +15,7 @@ export const addNewTransaction = (req, res) => {
       if (err) {
         res.send({error:true, message: err.error});
       }
-      res.json({transaction, error: false, message: "Spending successfully added"});
+      res.json({transaction, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_ADD_SUCCESS"});
     });
   });
 };
@@ -50,7 +50,7 @@ export const getTransactionById = (req, res) => {
       if (err) {
         res.send(err);
       }
-      res.json({transaction, error: false, message: "Spending successfully deleted"});
+      res.json({transaction});
     });
   });
 };
@@ -71,7 +71,7 @@ export const updateTransactionById = (req, res) => {
         if (err) {
           res.send(err);
         }
-        res.json({transaction, error: false, message: "Spending has been updated"});
+        res.json({transaction, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_UPDATE_SUCCESS"});
       }
     );
   });
@@ -88,7 +88,7 @@ export const removeTransactionById = (req, res) => {
         if (err) {
           res.send({error: true, message: err.error});
         }
-        res.json({ message: "Spending has been deleted", error: false});
+        res.json({ message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_DELETE_SUCCESS", error: false});
       }
     );
   });

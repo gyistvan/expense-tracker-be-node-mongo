@@ -14,7 +14,7 @@ export const register = (req, res) => {
     if (err) {
       if(err.code === 11000){
           return res.status(400).send({
-            message: "Email already in use, please choose another",
+            message: "SHARED_COMPONENTS.NOTIFICATIONS.EMAIL_ALREADY_IN_USE",
           });
       }
       else {
@@ -22,7 +22,7 @@ export const register = (req, res) => {
       }
     } else {
       user.hash_password = undefined;
-      return res.json({user, error: false, message: "Successful registration, you can login now"});
+      return res.json({user, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.REGISTRATION_SUCCESS"});
     }
   });
 };
@@ -36,7 +36,7 @@ export const login = (req, res) => {
       if (err) throw err;
       if (!user || !user.comparePassword(req.body.password)) {
         return res.status(401).json({error: true,
-          message: "Authentication failed. Invalid user or password.",
+          message: "SHARED_COMPONENTS.NOTIFICATIONS.LOGIN_FAILED",
         });
       }
       return res.json({
