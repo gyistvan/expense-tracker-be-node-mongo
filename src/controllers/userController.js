@@ -12,17 +12,20 @@ export const register = (req, res) => {
   newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
   newUser.save(function (err, user) {
     if (err) {
-      if(err.code === 11000){
-          return res.status(400).send({
-            message: "SHARED_COMPONENTS.NOTIFICATIONS.EMAIL_ALREADY_IN_USE",
-          });
-      }
-      else {
-          return res.status(400).send(err)
+      if (err.code === 11000) {
+        return res.status(400).send({
+          message: "SHARED_COMPONENTS.NOTIFICATIONS.EMAIL_ALREADY_IN_USE",
+        });
+      } else {
+        return res.status(400).send(err);
       }
     } else {
       user.hash_password = undefined;
-      return res.json({user, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.REGISTRATION_SUCCESS"});
+      return res.json({
+        user,
+        error: false,
+        message: "SHARED_COMPONENTS.NOTIFICATIONS.REGISTRATION_SUCCESS",
+      });
     }
   });
 };
@@ -35,9 +38,12 @@ export const login = (req, res) => {
     (err, user) => {
       if (err) throw err;
       if (!user || !user.comparePassword(req.body.password)) {
-        return res.status(401).json({error: true,
-          message: "SHARED_COMPONENTS.NOTIFICATIONS.LOGIN_FAILED",
-        });
+        return res
+          .status(401)
+          .json({
+            error: true,
+            message: "SHARED_COMPONENTS.NOTIFICATIONS.LOGIN_FAILED",
+          });
       }
       return res.json({
         token: jwt.sign(
@@ -100,7 +106,7 @@ export const updatePassword = (req, res) => {
           if (err) throw err;
           if (!user || !user.comparePassword(req.body.oldPassword)) {
             return res.status(400).json({
-              message: "Bad request, old password is invalid",
+              message: "SHARED_COMPONENTS.NOTIFICATIONS.OLD_PASSWORD_INVALID",
             });
           }
           User.findOneAndUpdate(

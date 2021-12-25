@@ -12,7 +12,11 @@ export const addNewIncome = (req, res) => {
       if (err) {
         res.send(err);
       }
-      res.json({income, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.INCOME_ADD_SUCCESS"});
+      res.json({
+        income,
+        error: false,
+        message: "SHARED_COMPONENTS.NOTIFICATIONS.INCOME_ADD_SUCCESS",
+      });
     });
   });
 };
@@ -51,7 +55,10 @@ export const removeIncomeById = (req, res) => {
         if (err) {
           res.send(err);
         }
-        res.json({ error:false, message: "SHARED_COMPONENTS.NOTIFICATIONS.INCOME_DELETE_SUCCESS" });
+        res.json({
+          error: false,
+          message: "SHARED_COMPONENTS.NOTIFICATIONS.INCOME_DELETE_SUCCESS",
+        });
       }
     );
   });

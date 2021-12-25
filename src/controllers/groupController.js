@@ -54,11 +54,15 @@ export const inviteUser = async (req, res) => {
       .equals(req.params.groupId)
       .select("ownerId name invited")
       .exec();
-    if (!invitedUser){
-      res.status(400).send({message: "SHARED_COMPONENTS.NOTIFICATIONS.USER_NOT_FOUND"})
+    if (!invitedUser) {
+      res
+        .status(400)
+        .send({ message: "SHARED_COMPONENTS.NOTIFICATIONS.USER_NOT_FOUND" });
     }
-    if (!group){
-      res.status(400).send({message: "SHARED_COMPONENTS.NOTIFICATIONS.GROUP_NOT_FOUND"})
+    if (!group) {
+      res
+        .status(400)
+        .send({ message: "SHARED_COMPONENTS.NOTIFICATIONS.GROUP_NOT_FOUND" });
     }
     if (owner && invitedUser && group) {
       User.findOneAndUpdate(
@@ -203,7 +207,10 @@ export const declineInvite = (req, res) => {
               if (err) {
                 res.send(err);
               }
-              res.send({ message: "SHARED_COMPONENTS.NOTIFICATIONS.DECLINE_INVITATION_SUCCESS" });
+              res.send({
+                message:
+                  "SHARED_COMPONENTS.NOTIFICATIONS.DECLINE_INVITATION_SUCCESS",
+              });
             }
           );
         });

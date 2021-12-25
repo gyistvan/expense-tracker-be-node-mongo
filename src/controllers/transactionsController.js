@@ -13,9 +13,13 @@ export const addNewTransaction = (req, res) => {
     });
     newTransaction.save((err, transaction) => {
       if (err) {
-        res.send({error:true, message: err.error});
+        res.send({ error: true, message: err.error });
       }
-      res.json({transaction, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_ADD_SUCCESS"});
+      res.json({
+        transaction,
+        error: false,
+        message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_ADD_SUCCESS",
+      });
     });
   });
 };
@@ -50,7 +54,7 @@ export const getTransactionById = (req, res) => {
       if (err) {
         res.send(err);
       }
-      res.json({transaction});
+      res.json({ transaction });
     });
   });
 };
@@ -71,7 +75,11 @@ export const updateTransactionById = (req, res) => {
         if (err) {
           res.send(err);
         }
-        res.json({transaction, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_UPDATE_SUCCESS"});
+        res.json({
+          transaction,
+          error: false,
+          message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_UPDATE_SUCCESS",
+        });
       }
     );
   });
@@ -86,9 +94,12 @@ export const removeTransactionById = (req, res) => {
       },
       (err, transaction) => {
         if (err) {
-          res.send({error: true, message: err.error});
+          res.send({ error: true, message: err.error });
         }
-        res.json({ message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_DELETE_SUCCESS", error: false});
+        res.json({
+          message: "SHARED_COMPONENTS.NOTIFICATIONS.SPENDING_DELETE_SUCCESS",
+          error: false,
+        });
       }
     );
   });
