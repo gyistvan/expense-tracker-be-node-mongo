@@ -41,9 +41,13 @@ export const addNewSaving = (req, res) => {
         error: false,
         message: `SHARED_COMPONENTS.NOTIFICATIONS.SAVING_ADD_SUCCESS`,
         translationParams: {
-            year: moment(saving.appliedMonth).format("YYYY."),
-            month: `SHARED_COMPONENTS.NOTIFICATIONS.MONTHS.${moment(saving.appliedMonth).format("MMMM").toUpperCase()}`
-          },
+          year: moment(saving.appliedMonth).format("YYYY."),
+          month: `SHARED_COMPONENTS.NOTIFICATIONS.MONTHS.${moment(
+            saving.appliedMonth
+          )
+            .format("MMMM")
+            .toUpperCase()}`,
+        },
       });
     });
   });
@@ -70,9 +74,13 @@ export const updateSavingById = (req, res) => {
           error: false,
           message: `SHARED_COMPONENTS.NOTIFICATIONS.SAVING_UPDATE_SUCCESS`,
           translationParams: {
-              year: moment(saving.appliedMonth).format("YYYY."),
-              month: `SHARED_COMPONENTS.NOTIFICATIONS.MONTHS.${moment(saving.appliedMonth).format("MMMM").toUpperCase()}`
-            },
+            year: moment(saving.appliedMonth).format("YYYY."),
+            month: `SHARED_COMPONENTS.NOTIFICATIONS.MONTHS.${moment(
+              saving.appliedMonth
+            )
+              .format("MMMM")
+              .toUpperCase()}`,
+          },
         });
       }
     );

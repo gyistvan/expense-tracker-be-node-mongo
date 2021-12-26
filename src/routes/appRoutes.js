@@ -8,8 +8,10 @@ import {
 } from "../controllers/groupController";
 import {
   addNewIncome,
+  getIncomeById,
   getIncomes,
   removeIncomeById,
+  updateIncomeById,
 } from "../controllers/incomesController";
 import {
   addNewSaving,
@@ -42,7 +44,11 @@ const routes = (app) => {
     .delete(removeTransactionById);
   app.route("/api/incomes").get(getIncomes).post(addNewIncome);
 
-  app.route("/api/incomeById/:incomeId").delete(removeIncomeById);
+  app
+    .route("/api/incomeById/:incomeId")
+    .get(getIncomeById)
+    .delete(removeIncomeById)
+    .put(updateIncomeById);
 
   app
     .route("/api/saving")

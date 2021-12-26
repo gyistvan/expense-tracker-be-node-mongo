@@ -15,7 +15,7 @@ export const incomeSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  spentAt: {
+  recievedAt: {
     type: Date,
     default: Date.now,
   },

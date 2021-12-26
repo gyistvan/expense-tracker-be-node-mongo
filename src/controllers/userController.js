@@ -38,12 +38,10 @@ export const login = (req, res) => {
     (err, user) => {
       if (err) throw err;
       if (!user || !user.comparePassword(req.body.password)) {
-        return res
-          .status(401)
-          .json({
-            error: true,
-            message: "SHARED_COMPONENTS.NOTIFICATIONS.LOGIN_FAILED",
-          });
+        return res.status(401).json({
+          error: true,
+          message: "SHARED_COMPONENTS.NOTIFICATIONS.LOGIN_FAILED",
+        });
       }
       return res.json({
         token: jwt.sign(

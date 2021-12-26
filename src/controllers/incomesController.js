@@ -63,3 +63,40 @@ export const removeIncomeById = (req, res) => {
     );
   });
 };
+
+export const getIncomeById = async (req, res) => {
+  const user = await getUser(req.headers.authorization);
+  if (user) {
+    Income.findOne()
+      .where("_id")
+      .equals(req.params.incomeId)
+      .exec((err, income) => {
+        if (err) {
+          res.send(err);
+        }
+        res.send(income);
+      });
+  }
+};
+
+export const updateIncomeById = async (req, res) => {
+  const user = await getUser(req.headers.authorization);
+  if (user) {
+    Income.findOneAndUpdate(
+      {
+        _id: req.params.incomeId,
+      },
+      req.body,
+      {
+        new: true,
+        useFindAndModify: false,
+      },
+      (err, income) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json({income, error: false, message: "SHARED_COMPONENTS.NOTIFICATIONS.INCOME_UPDATE_SUCCESS"});
+      }
+    );
+  }
+};
