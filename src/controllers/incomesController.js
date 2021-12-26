@@ -28,7 +28,7 @@ export const getIncomes = (req, res) => {
     const endDate = req.query.endDate;
     Income.find(
       {
-        spentAt: {
+        recievedAt: {
           $gte: new Date(startDate),
           $lte: new Date(endDate),
         },
