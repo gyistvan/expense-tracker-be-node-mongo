@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { getUser } from "../helpers/authenticateUser";
-import { groupSchema } from "../models/groupModel";
-import { userSchema } from "../models/userModel";
+import { getUser } from "../helpers/authenticateUser.js";
+import { groupSchema } from "../models/groupModel.js";
+import { userSchema } from "../models/userModel.js";
 
 const Group = mongoose.model("Group", groupSchema);
 const User = mongoose.model("User", userSchema);

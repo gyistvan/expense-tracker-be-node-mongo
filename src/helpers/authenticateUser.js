@@ -1,7 +1,7 @@
-import { userSchema } from "../models/userModel";
+import { userSchema } from "../models/userModel.js";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-import { JSON_SECRET } from "../..";
+import { JSON_SECRET } from "../../index.js";
 
 const User = mongoose.model("User", userSchema);
 

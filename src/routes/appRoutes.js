@@ -5,26 +5,26 @@ import {
   getGroup,
   inviteUser,
   updateGroup,
-} from "../controllers/groupController";
+} from "../controllers/groupController.js";
 import {
   addNewIncome,
   getIncomeById,
   getIncomes,
   removeIncomeById,
   updateIncomeById,
-} from "../controllers/incomesController";
+} from "../controllers/incomesController.js";
 import {
   addNewSaving,
   getSavingPercentForMonth,
   updateSavingById,
-} from "../controllers/savingController";
+} from "../controllers/savingController.js";
 import {
   addNewTransaction,
   getAllTransaction,
   getTransactionById,
   removeTransactionById,
   updateTransactionById,
-} from "../controllers/transactionsController";
+} from "../controllers/transactionsController.js";
 import {
   login,
   logout,
@@ -76,4 +76,4 @@ const routes = (app) => {
     .delete(declineInvite);
 };
 
-export default routes;
+export default routes; 

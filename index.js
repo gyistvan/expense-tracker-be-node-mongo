@@ -1,5 +1,5 @@
 import express from "express";
-import routes from "./src/routes/appRoutes";
+import routes from "./src/routes/appRoutes.js";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";

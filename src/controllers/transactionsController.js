@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { transactionSchema } from "../models/transactionModel";
-import { getUser } from "../helpers/authenticateUser";
+import { transactionSchema } from "../models/transactionModel.js";
+import { getUser } from "../helpers/authenticateUser.js";
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { getUser } from "../helpers/authenticateUser";
-import { incomeSchema } from "../models/incomeModel";
+import { getUser } from "../helpers/authenticateUser.js";
+import { incomeSchema } from "../models/incomeModel.js";
 
 const Income = mongoose.model("Income", incomeSchema);
 

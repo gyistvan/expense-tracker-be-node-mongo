@@ -1,7 +1,7 @@
 import moment from "moment";
 import mongoose from "mongoose";
-import { getUser } from "../helpers/authenticateUser";
-import { savingSchema } from "../models/savingModel";
+import { getUser } from "../helpers/authenticateUser.js";
+import { savingSchema } from "../models/savingModel.js";
 
 const Saving = mongoose.model("Saving", savingSchema);
 

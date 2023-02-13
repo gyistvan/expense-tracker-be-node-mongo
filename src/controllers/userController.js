@@ -1,9 +1,9 @@
-import { userSchema } from "../models/userModel";
+import { userSchema } from "../models/userModel.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { JSON_SECRET } from "../..";
-import { getUser } from "../helpers/authenticateUser";
+import { JSON_SECRET } from "../../index.js";
+import { getUser } from "../helpers/authenticateUser.js";
 
 const User = mongoose.model("User", userSchema);
 
